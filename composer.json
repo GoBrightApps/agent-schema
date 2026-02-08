@@ -1,0 +1,60 @@
+{
+    "name": "bright/agent-schema",
+    "description": "The agent-schema providing flexible class to build ai agent tool schema",
+    "keywords": [
+        "ai",
+        "agent",
+        "tools",
+        "schema",
+        "bright"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saeed",
+            "email": "saeedhosansh@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/contracts": "^12.49"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.22.0",
+        "pestphp/pest": "^3.8.2|^4.0.0",
+        "pestphp/pest-plugin-arch": "^3.1.1|^4.0.0",
+        "phpstan/phpstan": "^2.1",
+        "symfony/var-dumper": "^7.2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Agent\\Schema\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "scripts": {
+        "lint": "pint -v",
+        "test:lint": "pint --test -v",
+        "test:types": "phpstan analyse --ansi",
+        "test:unit": "pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
