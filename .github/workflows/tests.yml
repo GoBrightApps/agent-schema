@@ -3,16 +3,8 @@ name: Tests
 on: [push, pull_request]
 
 jobs:
-  ci:
+  testing:
     runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-        php: [8.4]
-        dependency-version: [prefer-lowest, prefer-stable]
-
-    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -21,24 +13,15 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.composer/cache/files
-          key: composer-${{ runner.os }}-${{ matrix.php }}-${{ hashFiles('composer.json') }}
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.json') }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, mbstring, zip
-          coverage: none
+          php-version: 8.4
 
-      # Install dependencies for prefer-lowest
-      - name: Install dependencies (prefer-lowest)
-        if: matrix.dependency-version == 'prefer-lowest'
-        run: composer update --prefer-lowest --no-interaction --prefer-dist --no-progress
-
-      # Install dependencies for prefer-stable
-      - name: Install dependencies (prefer-stable)
-        if: matrix.dependency-version == 'prefer-stable'
-        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Install dependencies
+        run: composer update --no-interaction --prefer-dist --no-progress
 
       - name: Run Tests
         run: composer run test
