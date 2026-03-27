@@ -9,7 +9,8 @@ use Agent\Schema\Concerns\TypeableSchema;
 
 class EnumSchema extends BaseSchema
 {
-    use NullableSchema, TypeableSchema;
+    use NullableSchema;
+    use TypeableSchema;
 
     /**
      * Create a new Enum schema.

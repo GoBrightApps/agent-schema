@@ -15,7 +15,6 @@ class ObjectSchema extends BaseSchema
      */
     public function __construct(?string $description = null, ?string $name = null)
     {
-
         $this->schema = [
             'type' => 'object',
             'additionalProperties' => false,
@@ -32,7 +31,6 @@ class ObjectSchema extends BaseSchema
         $this->schema['required'] = [];
         $this->schema['additionalProperties'] = false;
         $this->schema['properties'] = [];
-
     }
 
     /**

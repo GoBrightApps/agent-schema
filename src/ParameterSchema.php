@@ -9,7 +9,8 @@ use Agent\Schema\Concerns\TypeableSchema;
 
 class ParameterSchema extends BaseSchema
 {
-    use StrictableSchema, TypeableSchema;
+    use StrictableSchema;
+    use TypeableSchema;
 
     /**
      * Create a new parameter schema instance.
